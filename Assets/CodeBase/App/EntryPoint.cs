@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.CodeBase.App.StateMachine;
 using UnityEngine;
+using Zenject;
 
 public class EntryPoint : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private GameStateMachine _gameStateMachine;
+
+    [Inject]
+    public void Contructor(GameStateMachine gameStateMachine)
     {
-        
+        _gameStateMachine = gameStateMachine;       
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        _gameStateMachine.Enter<LoadStaticDataState>();
     }
 }
