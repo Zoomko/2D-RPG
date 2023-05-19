@@ -14,5 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemies:
   - Type: 0
-    EnemyCharacteristics: {fileID: 0}
-    EnemyPrefab: {fileID: 0}
+    EnemyCharacteristics: {fileID: 11400000, guid: ab7b81d42f8b82d4285d27d71d203e12, type: 2}
+    Loot: {fileID: 11400000, guid: 1b8915915b82b6b49a4dbaa07b7eaac3, type: 2}
+    EnemyPrefab: {fileID: 3790270541111040816, guid: e869c8b5a29a7f042ab7ae0203069287, type: 3}
+  - Type: 1
+    EnemyCharacteristics: {fileID: 11400000, guid: 4be493c29fb7c22498000be4c7fe092d, type: 2}
+    Loot: {fileID: 11400000, guid: dde2acb656bba00499d1dd11e0e2deb6, type: 2}
+    EnemyPrefab: {fileID: 3790270541111040816, guid: e869c8b5a29a7f042ab7ae0203069287, type: 3}

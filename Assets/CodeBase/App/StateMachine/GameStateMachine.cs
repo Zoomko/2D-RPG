@@ -1,4 +1,5 @@
 ﻿using Assets.CodeBase.App.Services;
+using Assets.CodeBase.Factories;
 using Assets.CodeBase.Services;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,17 @@ namespace Assets.CodeBase.App.StateMachine
         private IState _currentState;
         public GameStateMachine(PersistentDataService persistentDataService,
                                 IStaticDataService staticDataService,
-                                ISceneService sceneService)
+                                ISceneService sceneService,
+                                IPlayerFactory playerFactory,
+                                IHUDFactory hudFactory,
+                                IEnemyFactory enemyFactory,
+                                IBulletFactory bulletFactory)
         {
             _states = new Dictionary<Type, IState>()
             {
                 {typeof(LoadStaticDataState), new LoadStaticDataState(this, staticDataService)},
-                {typeof(LoadPersistentDataState), new LoadPersistentDataState(this, persistentDataService)},
-                {typeof(LoadSceneState), new LoadSceneState(this, sceneService)}
+                {typeof(LoadSceneState), new LoadSceneState(this, sceneService)},
+                {typeof(CreateObjectsState), new CreateObjectsState(this, persistentDataService, playerFactory, enemyFactory, hudFactory,bulletFactory)}
             };
         }
 
@@ -28,16 +33,12 @@ namespace Assets.CodeBase.App.StateMachine
 
             if (_currentState == null)
             {
-                var state = _states[typeof(T)] as INoneParameterizedState;
-                _currentState = state;
-                state.Enter();
+                SetNoneParameterizedState<T>();
             }
             else
             {
                 _currentState.Exit();
-                var state = _states[typeof(T)] as INoneParameterizedState;
-                _currentState = state;
-                state.Enter();
+                SetNoneParameterizedState<T>();
             }
         }
 
@@ -47,17 +48,27 @@ namespace Assets.CodeBase.App.StateMachine
                 throw new KeyNotFoundException();
             if (_currentState == null)
             {
-                var state = _states[typeof(T1)] as IParameterizedState;
-                _currentState = state;
-                state.Enter(data);
+                SetParameterizedState<T1, T2>(data);
             }
             else
             {
                 _currentState.Exit();
-                var state = _states[typeof(T1)] as IParameterizedState;
-                _currentState = state;
-                state.Enter(data);
+                SetParameterizedState<T1, T2>(data);
             }
+        }
+
+        private void SetParameterizedState<T1, T2>(T2 data) where T1 : IParameterizedState
+        {
+            var state = _states[typeof(T1)] as IParameterizedState;
+            _currentState = state;
+            state.Enter(data);
+        }
+
+        private void SetNoneParameterizedState<T>() where T : INoneParameterizedState
+        {
+            var state = _states[typeof(T)] as INoneParameterizedState;
+            _currentState = state;
+            state.Enter();
         }
     }
 }

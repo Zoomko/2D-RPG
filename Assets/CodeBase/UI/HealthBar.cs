@@ -1,35 +1,33 @@
+using Assets.CodeBase.Combat;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBar : MonoBehaviour
+namespace Assets.CodeBase.UI
 {
-    [SerializeField]
-    private Image _healthImageTarget;
-    //private IDamagable _damagable;
-    private Transform _cameraTransform;
+    public class HealthBar : MonoBehaviour
+    {
+        [SerializeField]
+        private Image _healthImageTarget;
+        [SerializeField]
+        private TextMeshProUGUI _text; 
+        protected IDamagable damagable;            
 
-    private void Awake()
-    {
-        //_damagable = GetComponentInParent<IDamagable>();
-        //_damagable.HealthChanged += OnHealthChange;
-    }
-    private void Start()
-    {
-        _cameraTransform = Camera.main.transform;
-    }
+        public void ResetValue(int maxHP)
+        {
+            _text.text = PrintHP(maxHP, maxHP);
+            _healthImageTarget.fillAmount = 1f;
+        }
 
-    public void ResetValue()
-    {
-        _healthImageTarget.fillAmount = 1f;
-    }
+        public void OnHealthChange(int currentHP, int maxHP, int damage)
+        {
+            _text.text = PrintHP(currentHP, maxHP);
+            _healthImageTarget.fillAmount = (float)currentHP / maxHP;
+        }
 
-    public void OnHealthChange(int currentHp, int maxHp, int damage)
-    {
-        _healthImageTarget.fillAmount = ( (float)currentHp ) / maxHp;
-    }
-
-    private void LateUpdate()
-    {
-        transform.forward = _cameraTransform.forward;
+        private static string PrintHP(int currentHP, int maxHP)
+        {
+            return currentHP.ToString() + "/" + maxHP.ToString();
+        }
     }
 }

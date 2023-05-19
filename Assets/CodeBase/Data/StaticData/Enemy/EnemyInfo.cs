@@ -1,5 +1,5 @@
-﻿using System;
-using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
+﻿using Assets.CodeBase.Data.StaticData.DropLoot;
+using System;
 using UnityEngine;
 
 namespace Assets.CodeBase.Data.StaticData.Enemy
@@ -9,6 +9,7 @@ namespace Assets.CodeBase.Data.StaticData.Enemy
     {
         public EnemyType Type;
         public EnemyCharacteristics EnemyCharacteristics;
+        public Loot Loot;
         public GameObject EnemyPrefab;
     }
 }

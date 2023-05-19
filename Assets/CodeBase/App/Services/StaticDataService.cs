@@ -8,13 +8,19 @@ namespace Assets.CodeBase.Services
     {
         private EnemiesStaticData _enemiesStaticData;
         private PlayerStaticData _playerStaticData;
+        private GameObject _hud;
+        private GameObject _bullet;
         public EnemiesStaticData Enemies => _enemiesStaticData;
         public PlayerStaticData Player => _playerStaticData;
+        public GameObject HUD => _hud;
+        public GameObject Bullet => _bullet;
 
         public void Load()
         {
             LoadEnemies();
             LoadPlayer();
+            LoadHUD();
+            LoadBullet();
         }
 
         public void LoadEnemies()
@@ -25,6 +31,14 @@ namespace Assets.CodeBase.Services
         public void LoadPlayer()
         {
             _playerStaticData = Resources.Load<PlayerStaticData>(Paths.PlayerStaticDataPath);
+        }
+        public void LoadHUD()
+        {
+            _hud = Resources.Load<GameObject>(Paths.HUDDataPath);
+        }
+        public void LoadBullet()
+        {
+            _bullet = Resources.Load<GameObject>(Paths.BulletPath);
         }
 
     }

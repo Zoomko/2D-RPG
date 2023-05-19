@@ -1,4 +1,5 @@
 ﻿using Assets.CodeBase.Data.StaticData;
+using UnityEngine;
 
 namespace Assets.CodeBase.Services
 {
@@ -6,6 +7,8 @@ namespace Assets.CodeBase.Services
     {
         EnemiesStaticData Enemies { get; }
         PlayerStaticData Player { get; }
+        GameObject HUD { get; }
+        GameObject Bullet { get; }
         void Load();
     }
 }

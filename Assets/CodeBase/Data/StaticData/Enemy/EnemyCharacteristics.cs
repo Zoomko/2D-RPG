@@ -6,5 +6,10 @@ namespace Assets.CodeBase.Data.StaticData
     public class EnemyCharacteristics : ScriptableObject
     {
         public int HP;
+        public float MovementSpeed;
+        public int AttackDamage;
+        public int AttacksPerSecond;
+        public float RadiusOfAttack;
+        public float RadiusOfDetection;
     }
 }

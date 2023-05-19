@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82a9214ad270afb4d8e10fd30fb48826, type: 3}
+  m_Name: ZombieLoot
+  m_EditorClassIdentifier: 
+  DropAlways:
+  - Item: {fileID: 11400000, guid: 2cf8d03e87c73b04c865df61ba04f46f, type: 2}
+    Count: 5
+  DropLootWithProbability: []

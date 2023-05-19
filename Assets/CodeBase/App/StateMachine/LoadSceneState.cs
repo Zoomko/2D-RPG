@@ -22,7 +22,7 @@ namespace Assets.CodeBase.App.StateMachine
         }
         public void OnLoaded()
         {
-
+            _gameStateMachine.Enter<CreateObjectsState>();
         }
         public void Exit()
         {

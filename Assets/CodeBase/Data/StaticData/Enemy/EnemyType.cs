@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace Assets.CodeBase.Data.StaticData.Enemy
 {
-    public enum EnemyType { }
+    public enum EnemyType { Zombie, Flesh }
 }
