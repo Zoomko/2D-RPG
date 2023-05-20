@@ -1,13 +1,17 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
 namespace Assets.CodeBase.Inventory
 {
     [RequireComponent(typeof(Image))]
-    public class ViewSlot : MonoBehaviour
+    public class ViewSlot : MonoBehaviour, IPointerClickHandler
     {
+        public event Action<int, Vector2> Clicked;
+
         private int _id;
         private int _count;   
         private Image _spriteRenderer;
@@ -51,9 +55,17 @@ namespace Assets.CodeBase.Inventory
         }
         public void RemoveSlot()
         {
+            _id = 0;
+            _count = 0;
             _spriteRenderer.sprite = null;
             _spriteRenderer.color = _emptyColor;
             _textMesh.text = string.Empty;          
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if(Id != 0)
+                Clicked?.Invoke(_id, eventData.position);            
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Assets.CodeBase.Inventory
 {
     public class InventoryView:MonoBehaviour
     {
-        public event Action Closed;
+        public event Action<int,Vector2> ClickOnSlotWithItemId;       
 
         [SerializeField]
         private ViewSlot _slot;
@@ -17,6 +17,9 @@ namespace Assets.CodeBase.Inventory
         [SerializeField]
         private Button _closeButton;
         private List<ViewSlot> _slots;
+
+        private int _choosedSlotItemId;
+
 
         public void Constructor(List<ControllerSlot> slots, UnityAction Close)
         {
@@ -30,7 +33,8 @@ namespace Assets.CodeBase.Inventory
             for (int i = 0; i < slots.Count; i++)
             {
                 var controllerSlot = slots[i];
-                var viewSlot = GameObject.Instantiate(_slot, _parentOfSlots);               
+                var viewSlot = GameObject.Instantiate(_slot, _parentOfSlots);
+                viewSlot.Clicked += OnViewSlotClick;
                 _slots.Add(viewSlot);
                 AddItem(i, controllerSlot);
             }
@@ -49,5 +53,10 @@ namespace Assets.CodeBase.Inventory
         {
             _slots[slotId].ChangeCount(count);
         }
+
+        public void OnViewSlotClick(int id, Vector2 clickPosition)
+        {
+            ClickOnSlotWithItemId?.Invoke(id, clickPosition);
+        }        
     }
 }

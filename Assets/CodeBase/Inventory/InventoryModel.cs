@@ -98,8 +98,8 @@ namespace Assets.CodeBase.Inventory
         {
             var slot = GetSlotById(id);
             slot.SlotType = SlotType.Empty;
-            slot.ItemCount = -1;
-            slot.ItemId = -1;
+            slot.ItemCount = 0;
+            slot.ItemId = 0;
             ItemRemoved?.Invoke(slot);
         }
 

@@ -19,8 +19,9 @@ namespace Assets.CodeBase.Inventory
         private readonly IWindowsFactory _windowsFactory;
         private readonly IStaticDataService _staticDataService;
         private readonly IUIInputService _uiInputService;
-        private InventoryView _inventoryView;
 
+        private InventoryView _inventoryView;
+        private InventoryContextMenu _inventoryContextMenu;
         
         public InventoryController(IWindowsFactory windowsFactory,IStaticDataService staticDataService, IUIInputService uiInputService) 
         {
@@ -39,18 +40,35 @@ namespace Assets.CodeBase.Inventory
         public void Open()
         {
             _inventoryView = _windowsFactory.CreateWindow<InventoryView>("Inventory");
-            List<ControllerSlot> slots = CreateControllerSlots();
+            _inventoryView.ClickOnSlotWithItemId += OnClickOnSlot;
+            var slots = CreateControllerSlots();
             _inventoryView.Constructor(slots, Close);
-        }        
+        }
+
+        private void OnClickOnSlot(int id, Vector2 clickPosition)
+        {
+            if(_inventoryContextMenu == null)            
+                _inventoryContextMenu = _windowsFactory.CreateWindow<InventoryContextMenu>("InventoryContextMenu");
+            _inventoryContextMenu.SetContextMenuToPosition(clickPosition);
+            _inventoryContextMenu.Contructor(this, id);
+        }
 
         public void Close()
         {
+            _inventoryView.ClickOnSlotWithItemId -= OnClickOnSlot;
+            if (_inventoryContextMenu != null)
+                GameObject.Destroy(_inventoryContextMenu.gameObject);
             GameObject.Destroy(_inventoryView.gameObject); 
         }
 
         public void AddItem(int id, int count)
         {
             _inventoryModel.AddItem(id, count);
+        }
+
+        public void RemoveItem(int id)
+        {
+            _inventoryModel.RemoveItem(id);
         }
 
         public bool CanSpendBullet()

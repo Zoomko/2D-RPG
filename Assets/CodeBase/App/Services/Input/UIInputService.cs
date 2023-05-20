@@ -12,8 +12,7 @@ namespace Assets.CodeBase.App.Services.Input
         public void Tick()
         {
             if (SimpleInput.GetButtonDown(InventoryKeyCode))
-            {
-                Debug.Log("Button pressed");
+            {              
                 InventoryButtonPressed?.Invoke();
             }
         }

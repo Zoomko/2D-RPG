@@ -15,3 +15,5 @@ MonoBehaviour:
   _windowsObjects:
   - Name: Inventory
     Window: {fileID: 1052592600496125352, guid: b7e4117050e8f5c44ade96ce7bc0c080, type: 3}
+  - Name: InventoryContextMenu
+    Window: {fileID: 61584252776190089, guid: dfd00688e24bff74ab68ec3e805ba4af, type: 3}
