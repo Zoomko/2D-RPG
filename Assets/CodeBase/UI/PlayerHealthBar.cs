@@ -1,4 +1,5 @@
 using Assets.CodeBase.Combat;
+using Assets.CodeBase.Player;
 using Assets.CodeBase.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,9 +7,10 @@ using UnityEngine;
 
 public class PlayerHealthBar : HealthBar
 {
-    public void SetDamagable(IDamagable damagable)
+    public void SetHealthable(IHealthable healthable)
     {
-        this.damagable = damagable;
-        this.damagable.HPChanged += OnHealthChange;
+        this._healthable = healthable;
+        this._healthable.HealthChanged += OnHealthChange;
+        OnHealthChange();
     }
 }

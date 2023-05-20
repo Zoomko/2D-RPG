@@ -1,4 +1,5 @@
 using Assets.CodeBase.Combat;
+using Assets.CodeBase.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,24 +11,18 @@ namespace Assets.CodeBase.UI
         [SerializeField]
         private Image _healthImageTarget;
         [SerializeField]
-        private TextMeshProUGUI _text; 
-        protected IDamagable damagable;            
+        private TextMeshProUGUI _text;
+        protected IHealthable _healthable;
 
-        public void ResetValue(int maxHP)
+        public void OnHealthChange()
         {
-            _text.text = PrintHP(maxHP, maxHP);
-            _healthImageTarget.fillAmount = 1f;
+            _healthImageTarget.fillAmount = (float)_healthable.CurrentHP / _healthable.MaxHP;
+            PrintHP();
         }
 
-        public void OnHealthChange(int currentHP, int maxHP, int damage)
+        protected void PrintHP()
         {
-            _text.text = PrintHP(currentHP, maxHP);
-            _healthImageTarget.fillAmount = (float)currentHP / maxHP;
-        }
-
-        private static string PrintHP(int currentHP, int maxHP)
-        {
-            return currentHP.ToString() + "/" + maxHP.ToString();
+            _text.text = _healthable.CurrentHP.ToString() + "/" + _healthable.MaxHP.ToString();
         }
     }
 }

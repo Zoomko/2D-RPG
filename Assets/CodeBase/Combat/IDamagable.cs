@@ -6,6 +6,6 @@ namespace Assets.CodeBase.Combat
     {
         void GetDamage(int damage);
         //Where 1-st argment is currentHP, 2-en is maxHP, 3-th is damage
-        event Action<int, int, int> HPChanged;
+        event Action<int> DamageGotten;
     }
 }

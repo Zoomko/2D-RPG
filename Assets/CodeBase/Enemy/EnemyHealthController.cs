@@ -8,20 +8,33 @@ using UnityEngine;
 namespace Assets.CodeBase.Enemy
 {
     [RequireComponent(typeof(EnemyDieController))]
-    public class EnemyHealthController : MonoBehaviour, IDamagable
+    public class EnemyHealthController : MonoBehaviour, IDamagable, IHealthable
     {
         private EnemyDieController _enemyDieController;
         private EnemyCharacteristics _enemyCharacteristics;
         private int _maxHP;
         private int _currentHP;
 
-        public event Action<int, int, int> HPChanged;
+        public int CurrentHP
+        {
+            get { return _currentHP; }
+            private set
+            {
+                _currentHP = value;
+                HealthChanged?.Invoke();
+            }
+        }
+
+        public int MaxHP => _maxHP;
+
+        public event Action<int> DamageGotten;
+        public event Action HealthChanged;
 
         public void Contructor(EnemyCharacteristics enemyCharacteristics)
         {
             _enemyCharacteristics = enemyCharacteristics;
             _maxHP = _enemyCharacteristics.HP;
-            _currentHP = _maxHP;
+            CurrentHP = _maxHP;
         }
         private void Awake()
         {
@@ -35,8 +48,8 @@ namespace Assets.CodeBase.Enemy
             {
                 _enemyDieController.Die();
             }
-            HPChanged?.Invoke(result, _maxHP, damage);
-            _currentHP = result;
+            DamageGotten?.Invoke(damage);
+            CurrentHP = result;
         }
     }
 }

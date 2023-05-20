@@ -1,4 +1,5 @@
 ﻿using Assets.CodeBase.Combat;
+using Assets.CodeBase.Player;
 using Assets.CodeBase.Services;
 using Assets.CodeBase.UI;
 using UnityEngine;
@@ -20,9 +21,9 @@ namespace Assets.CodeBase.Factories
         {
             var prefab = _staticDataService.HUD;
             var _hud = GameObject.Instantiate(prefab);          
-            var healthBar = _hud.GetComponentInChildren<HealthBar>();
-            var damagable = _playerFactory.Player.GetComponent<IDamagable>();
-            damagable.HPChanged += healthBar.OnHealthChange;            
+            var healthBar = _hud.GetComponentInChildren<PlayerHealthBar>();
+            var healthable = _playerFactory.Player.GetComponent<IHealthable>();
+            healthBar.SetHealthable(healthable);                       
             return _hud;
         }
     }

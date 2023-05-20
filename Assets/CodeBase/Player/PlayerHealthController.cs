@@ -10,20 +10,33 @@ using UnityEngine;
 namespace Assets.CodeBase.Player
 {
     [RequireComponent(typeof(PlayerDieController))]
-    public class PlayerHealthController : MonoBehaviour, IDamagable, ILoadable<PlayerData>, ISaveable<PlayerData>
+    public class PlayerHealthController : MonoBehaviour, IDamagable, IHealthable, ILoadable<PlayerData>, ISaveable<PlayerData>
     {
         private PlayerDieController _playerDieController;
         private PlayerCharacteristics _playerCharacteristics;
-        private int _maxHP;
         private int _currentHP;
+        private int _maxHP;
 
-        public event Action<int, int, int> HPChanged;
+        public int CurrentHP
+        {
+            get { return _currentHP; }
+            private set 
+            { 
+                _currentHP = value;
+                HealthChanged?.Invoke();
+            }
+        }
+
+        public int MaxHP => _maxHP;
+
+        public event Action<int> DamageGotten;
+        public event Action HealthChanged;
 
         public void Contructor(PlayerCharacteristics playerCharacteristics)
         {
             _playerCharacteristics = playerCharacteristics;
             _maxHP = _playerCharacteristics.HP;
-            _currentHP = _maxHP;
+            CurrentHP = _maxHP;
         }
         private void Awake()
         {
@@ -37,13 +50,13 @@ namespace Assets.CodeBase.Player
             {
                 _playerDieController.Die();
             }
-            HPChanged?.Invoke(result, _maxHP, damage);
-            _currentHP = result;
+            DamageGotten?.Invoke(damage);
+            CurrentHP = result;
         }
 
         public void Load(PlayerData playerData)
         {
-            _currentHP = playerData.HP;
+            CurrentHP = playerData.HP;
         }
 
         public void Save(PlayerData playerData)
