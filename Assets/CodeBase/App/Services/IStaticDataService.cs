@@ -14,6 +14,7 @@ namespace Assets.CodeBase.Services
         GameObject Loot { get; }
         WindowsObjects Windows { get; }
         Dictionary<int, ItemData> Items { get; }
+        Dictionary<string, ItemData> ItemsWithKeyNames { get; }
         void Load();
     }
 }

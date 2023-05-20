@@ -4,6 +4,7 @@ using Assets.CodeBase.Inventory.Item;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 namespace Assets.CodeBase.Services
 {
@@ -16,6 +17,7 @@ namespace Assets.CodeBase.Services
         private GameObject _loot;
         private WindowsObjects _windows;
         private Dictionary<int, ItemData> _items;
+        private Dictionary<string, ItemData> _itemsWithKeyNames;
         public EnemiesStaticData Enemies => _enemiesStaticData;
         public PlayerStaticData Player => _playerStaticData;
         public GameObject HUD => _hud;
@@ -24,6 +26,8 @@ namespace Assets.CodeBase.Services
         public Dictionary<int, ItemData> Items => _items;
 
         public WindowsObjects Windows => _windows;
+
+        public Dictionary<string, ItemData> ItemsWithKeyNames => _itemsWithKeyNames;
 
         public void Load()
         {
@@ -63,7 +67,9 @@ namespace Assets.CodeBase.Services
         }
         public void LoadItems()
         {
-            _items = Resources.LoadAll<ItemData>(Paths.ItemsPath).ToDictionary(x => x.Id);
+            var items = Resources.LoadAll<ItemData>(Paths.ItemsPath);
+            _items = items.ToDictionary(x => x.Id);
+            _itemsWithKeyNames = items.ToDictionary(x => x.Name);
         }
 
     }

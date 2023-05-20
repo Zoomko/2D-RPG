@@ -45,9 +45,10 @@ namespace Assets.CodeBase.Player
 
         private void Update()
         {
-            if (!_isReloading && _wantToAttack && _canAttack)
+            if (!_isReloading && _wantToAttack && _canAttack && _inventoryController.CanSpendBullet())
             {
                 Attack();
+                _inventoryController.SpendBullet();
             }
         }
 

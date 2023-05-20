@@ -10,6 +10,6 @@ namespace Assets.CodeBase.Helper
         public const string BulletPath = "Gameplay/Player/Bullet";
         public const string LootPath = "Gameplay/DropLoot/Loot";
         public const string WindowsPath = "Gameplay/UI/Windows";
-        public const string ItemsPath = "Gameplay/Items/Bullet";
+        public const string ItemsPath = "Gameplay/Items";
     }
 }

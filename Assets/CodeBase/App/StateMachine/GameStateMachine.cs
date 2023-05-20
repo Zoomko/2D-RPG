@@ -1,5 +1,6 @@
 ﻿using Assets.CodeBase.App.Services;
 using Assets.CodeBase.Factories;
+using Assets.CodeBase.Inventory;
 using Assets.CodeBase.Services;
 using System;
 using System.Collections.Generic;
@@ -17,13 +18,27 @@ namespace Assets.CodeBase.App.StateMachine
                                 IHUDFactory hudFactory,
                                 IEnemyFactory enemyFactory,
                                 IBulletFactory bulletFactory,
-                                ILootFactory lootFactory)
+                                ILootFactory lootFactory,
+                                InventoryController inventoryController)
         {
             _states = new Dictionary<Type, IState>()
             {
-                {typeof(LoadStaticDataState), new LoadStaticDataState(this, staticDataService)},
-                {typeof(LoadSceneState), new LoadSceneState(this, sceneService)},
-                {typeof(CreateObjectsState), new CreateObjectsState(this, persistentDataService, playerFactory, enemyFactory, hudFactory,bulletFactory,lootFactory)}
+                {typeof(LoadStaticDataState), new LoadStaticDataState(
+                    this,
+                    staticDataService)},
+                {typeof(LoadSceneState), new LoadSceneState(
+                    this,
+                    sceneService)},
+                {typeof(CreateObjectsState), new CreateObjectsState(
+                    this,
+                    persistentDataService,
+                    playerFactory,
+                    enemyFactory,
+                    hudFactory,
+                    bulletFactory,
+                    lootFactory,
+                    inventoryController,
+                    staticDataService)}
             };
         }
 

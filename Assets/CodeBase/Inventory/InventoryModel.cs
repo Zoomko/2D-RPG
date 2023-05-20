@@ -54,7 +54,7 @@ namespace Assets.CodeBase.Inventory
             if (ContainsSlotWithId(id))
             {
                 var modelSlot = GetSlotById(id);
-                ChangeCount(modelSlot, count);
+                ChangeCount(modelSlot, -count);
                 if (modelSlot.ItemCount == 0)
                 {
                     RemoveItem(id);                    
@@ -79,7 +79,7 @@ namespace Assets.CodeBase.Inventory
                     return true;
                 else return false;
             }
-            else throw new ArgumentException("There is no slot with this id");
+            return false;
         }
 
         public bool CanTakeOne(int id)

@@ -15,4 +15,10 @@ MonoBehaviour:
   DropAlways:
   - Item: {fileID: 11400000, guid: 2cf8d03e87c73b04c865df61ba04f46f, type: 2}
     Count: 10
-  DropLootWithProbability: []
+  DropLootWithProbability:
+  - Item: {fileID: 11400000, guid: 1de666809bef0e34389952ff643ca857, type: 2}
+    Probability: 0.5
+    Count: 1
+  - Item: {fileID: 11400000, guid: b00621c58938ae44081f5446775d4efd, type: 2}
+    Probability: 0.5
+    Count: 1

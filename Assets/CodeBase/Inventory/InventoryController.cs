@@ -20,6 +20,8 @@ namespace Assets.CodeBase.Inventory
         private readonly IStaticDataService _staticDataService;
         private readonly IUIInputService _uiInputService;
         private InventoryView _inventoryView;
+
+        
         public InventoryController(IWindowsFactory windowsFactory,IStaticDataService staticDataService, IUIInputService uiInputService) 
         {
             _inventoryModel = new InventoryModel(_countOfItemsInInventory);
@@ -31,8 +33,7 @@ namespace Assets.CodeBase.Inventory
 
             _inventoryModel.CountChanged += OnCountChanged;
             _inventoryModel.ItemAdded += OnItemAdded;
-            _inventoryModel.ItemRemoved += OnItemRemoved;
-
+            _inventoryModel.ItemRemoved += OnItemRemoved;            
         }       
 
         public void Open()
@@ -50,6 +51,18 @@ namespace Assets.CodeBase.Inventory
         public void AddItem(int id, int count)
         {
             _inventoryModel.AddItem(id, count);
+        }
+
+        public bool CanSpendBullet()
+        {
+            var _bulletId = _staticDataService.ItemsWithKeyNames["Bullet"].Id;
+            return _inventoryModel.CanTakeOne(_bulletId);
+        }
+
+        public void SpendBullet()
+        {
+            var _bulletId = _staticDataService.ItemsWithKeyNames["Bullet"].Id;
+            _inventoryModel.TakeOneItem(_bulletId);
         }
 
         private void OnInventoryButtonPressed()

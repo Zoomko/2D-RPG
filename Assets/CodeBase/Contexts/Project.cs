@@ -1,6 +1,7 @@
 #define PRODUCTION
 using Assets.CodeBase.App.Services;
 using Assets.CodeBase.App.Services.Input;
+using Assets.CodeBase.App.Services.Probability;
 using Assets.CodeBase.App.StateMachine;
 using Assets.CodeBase.Data.StaticData;
 using Assets.CodeBase.Factories;
@@ -21,6 +22,7 @@ public class Project : MonoInstaller
         Container.Bind<ISceneService>().To<SceneService>().AsSingle();
         Container.Bind<CoroutineRunner>().FromNewComponentOnNewGameObject().AsSingle();
         Container.Bind<PersistentDataService>().AsSingle();
+        Container.Bind<ProbabilityLootService>().AsSingle();
         RegisterFactories();
         RegisterInputService();
         RegisterUIControllers();

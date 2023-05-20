@@ -34,16 +34,14 @@ namespace Assets.CodeBase.Enemy.StateMachine
             _playerDamagable = _playerTransform.gameObject.GetComponent<IDamagable>();
         }
         public void Enter()
-        {
-            Debug.Log("Enter to Attack state");
+        {      
             Attack(_playerDamagable);
         }
 
         public void Exit()
         {
             if (_coroutine != null)
-                _coroutineRunner.StopCoroutine(_coroutine);
-            Debug.Log("Exit from Attack state");
+                _coroutineRunner.StopCoroutine(_coroutine);     
         }
 
         private void Attack(IDamagable _playerDamagable)

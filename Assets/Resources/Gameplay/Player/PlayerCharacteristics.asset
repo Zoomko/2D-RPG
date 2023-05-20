@@ -18,3 +18,4 @@ MonoBehaviour:
   AttacksInSecond: 1
   Damage: 5
   BulletSpeed: 20
+  LootGrabRadius: 0.5
