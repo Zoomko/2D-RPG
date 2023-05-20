@@ -13,13 +13,15 @@ namespace Assets.CodeBase.App.StateMachine
         private readonly IEnemyFactory _enemyFactory;
         private readonly IHUDFactory _hudFactory;
         private readonly IBulletFactory _bulletFactory;
+        private readonly ILootFactory _lootFactory;
 
         public CreateObjectsState(GameStateMachine gameStateMachine,
                                   PersistentDataService persistentDataService,
                                   IPlayerFactory playerFactory,
                                   IEnemyFactory enemyFactory,
                                   IHUDFactory hudFactory,
-                                  IBulletFactory bulletFactory)
+                                  IBulletFactory bulletFactory,
+                                  ILootFactory lootFactory)
         {
             _gameStateMachine = gameStateMachine;
             _persistentDataService = persistentDataService;
@@ -27,6 +29,7 @@ namespace Assets.CodeBase.App.StateMachine
             _enemyFactory = enemyFactory;
             _hudFactory = hudFactory;
             _bulletFactory = bulletFactory;
+            _lootFactory = lootFactory;
         }
         public void Enter()
         {
@@ -41,6 +44,7 @@ namespace Assets.CodeBase.App.StateMachine
 
                 _enemyFactory.InitializePool();
                 _bulletFactory.InitializePool();
+                _lootFactory.InitializePool();
 
                 for (int i = 0; i < enemySpanwers.Length; i++)
                 {

@@ -16,13 +16,14 @@ namespace Assets.CodeBase.App.StateMachine
                                 IPlayerFactory playerFactory,
                                 IHUDFactory hudFactory,
                                 IEnemyFactory enemyFactory,
-                                IBulletFactory bulletFactory)
+                                IBulletFactory bulletFactory,
+                                ILootFactory lootFactory)
         {
             _states = new Dictionary<Type, IState>()
             {
                 {typeof(LoadStaticDataState), new LoadStaticDataState(this, staticDataService)},
                 {typeof(LoadSceneState), new LoadSceneState(this, sceneService)},
-                {typeof(CreateObjectsState), new CreateObjectsState(this, persistentDataService, playerFactory, enemyFactory, hudFactory,bulletFactory)}
+                {typeof(CreateObjectsState), new CreateObjectsState(this, persistentDataService, playerFactory, enemyFactory, hudFactory,bulletFactory,lootFactory)}
             };
         }
 

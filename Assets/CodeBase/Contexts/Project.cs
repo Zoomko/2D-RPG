@@ -5,6 +5,7 @@ using Assets.CodeBase.App.StateMachine;
 using Assets.CodeBase.Data.StaticData;
 using Assets.CodeBase.Factories;
 using Assets.CodeBase.Helper;
+using Assets.CodeBase.Inventory;
 using Assets.CodeBase.Services;
 using Zenject;
 
@@ -20,11 +21,24 @@ public class Project : MonoInstaller
         Container.Bind<ISceneService>().To<SceneService>().AsSingle();
         Container.Bind<CoroutineRunner>().FromNewComponentOnNewGameObject().AsSingle();
         Container.Bind<PersistentDataService>().AsSingle();
+        RegisterFactories();
+        RegisterInputService();
+        RegisterUIControllers();
+    }
+
+    private void RegisterUIControllers()
+    {
+        Container.Bind<InventoryController>().AsSingle();
+    }
+
+    private void RegisterFactories()
+    {
         Container.Bind<IPlayerFactory>().To<PlayerFactory>().AsSingle();
         Container.Bind<IHUDFactory>().To<HUDFactory>().AsSingle();
         Container.Bind<IEnemyFactory>().To<EnemyFactory>().AsSingle();
         Container.Bind<IBulletFactory>().To<BulletFactory>().AsSingle();
-        RegisterInputService(); 
+        Container.Bind<ILootFactory>().To<LootFactory>().AsSingle();
+        Container.Bind<IWindowsFactory>().To<WindowsFactory>().AsSingle();
     }
 
     private void RegisterInputService()
@@ -35,5 +49,6 @@ public class Project : MonoInstaller
 #if DEVELOPMENT
         Container.Bind(typeof(IInputService), typeof(ITickable)).To<StandaloneInputService>().AsSingle();
 #endif
+        Container.Bind(typeof(IUIInputService), typeof(ITickable)).To<UIInputService>().AsSingle();
     }
 }

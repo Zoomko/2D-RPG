@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.CodeBase.Data
+namespace Assets.CodeBase.Data.StaticData
 {
     [CreateAssetMenu(fileName = "PlayerCharacteristics", menuName = "StaticData/PlayerCharacteristics")]
-    public class PlayerCharacteristics:ScriptableObject
+    public class PlayerCharacteristics : ScriptableObject
     {
         public int HP;
         public float MovementSpeed;
@@ -17,5 +12,7 @@ namespace Assets.CodeBase.Data
         public float AttacksInSecond;
         public int Damage;
         public float BulletSpeed;
+        [Header("Loot")]
+        public float LootGrabRadius;
     }
 }

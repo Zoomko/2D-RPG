@@ -10,19 +10,23 @@ namespace Assets.CodeBase.App.Services.Input
 {
     public class MobileInputService : IInputService, ITickable
     {
-        public Vector2 MoveVector => new Vector2(SimpleInput.GetAxis("Horizontal"),SimpleInput.GetAxis("Vertical"));
+        private const string AttackKeyCode = "Fire";
+        private const string AxisX = "Horizontal";
+        private const string AxisY = "Vertical";
+
+        public Vector2 MoveVector => new Vector2(SimpleInput.GetAxis(AxisX),SimpleInput.GetAxis(AxisY));
         
         public event Action FireButtonPressed;
         public event Action FireButtonReleased;
 
         public void Tick()
         {
-            if(SimpleInput.GetButtonDown("Fire"))
+            if(SimpleInput.GetButtonDown(AttackKeyCode))
             {
                 FireButtonPressed?.Invoke();
             }
 
-            if (SimpleInput.GetButtonUp("Fire"))
+            if (SimpleInput.GetButtonUp(AttackKeyCode))
             {
                 FireButtonReleased?.Invoke();
             }

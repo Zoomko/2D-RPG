@@ -1,5 +1,8 @@
 ﻿using Assets.CodeBase.Data.StaticData;
 using Assets.CodeBase.Helper;
+using Assets.CodeBase.Inventory.Item;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.CodeBase.Services
@@ -10,10 +13,17 @@ namespace Assets.CodeBase.Services
         private PlayerStaticData _playerStaticData;
         private GameObject _hud;
         private GameObject _bullet;
+        private GameObject _loot;
+        private WindowsObjects _windows;
+        private Dictionary<int, ItemData> _items;
         public EnemiesStaticData Enemies => _enemiesStaticData;
         public PlayerStaticData Player => _playerStaticData;
         public GameObject HUD => _hud;
         public GameObject Bullet => _bullet;
+        public GameObject Loot => _loot;
+        public Dictionary<int, ItemData> Items => _items;
+
+        public WindowsObjects Windows => _windows;
 
         public void Load()
         {
@@ -21,6 +31,9 @@ namespace Assets.CodeBase.Services
             LoadPlayer();
             LoadHUD();
             LoadBullet();
+            LoadLoot();
+            LoadWindows();
+            LoadItems();
         }
 
         public void LoadEnemies()
@@ -39,6 +52,18 @@ namespace Assets.CodeBase.Services
         public void LoadBullet()
         {
             _bullet = Resources.Load<GameObject>(Paths.BulletPath);
+        }
+        public void LoadLoot()
+        {
+            _loot = Resources.Load<GameObject>(Paths.LootPath);
+        }
+        public void LoadWindows()
+        {
+            _windows = Resources.Load<WindowsObjects>(Paths.WindowsPath);
+        }
+        public void LoadItems()
+        {
+            _items = Resources.LoadAll<ItemData>(Paths.ItemsPath).ToDictionary(x => x.Id);
         }
 
     }

@@ -4,7 +4,7 @@ using System;
 namespace Assets.CodeBase.Data.StaticData.DropLoot
 {
     [Serializable]
-    public class LootWithProbability
+    public class LootInfoWithProbability
     {
         public ItemData Item;
         public float Probability;

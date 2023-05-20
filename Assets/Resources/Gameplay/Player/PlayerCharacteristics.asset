@@ -17,3 +17,4 @@ MonoBehaviour:
   RadiusOfAttack: 6
   AttacksInSecond: 1
   Damage: 5
+  BulletSpeed: 20

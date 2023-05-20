@@ -1,7 +1,8 @@
 ﻿using Assets.CodeBase.App.Services.Input;
 using Assets.CodeBase.Combat.Bullets;
-using Assets.CodeBase.Data;
+using Assets.CodeBase.Data.StaticData;
 using Assets.CodeBase.Factories;
+using Assets.CodeBase.Inventory;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace Assets.CodeBase.Player
         private IInputService _inputService;
         private WaitForSeconds _waitForSeconds;
         private IBulletFactory _bulletFactory;
+        private InventoryController _inventoryController;
 
         private bool _isReloading = false;
         private bool _wantToAttack = false;
@@ -25,11 +27,12 @@ namespace Assets.CodeBase.Player
 
         private int maxCountOfEnemies = 10;
         private Collider2D[] _enemies;
-        public void Contructor(PlayerCharacteristics playerCharacteristics, IInputService inputService, IBulletFactory bulletFactory)
+        public void Contructor(PlayerCharacteristics playerCharacteristics, IInputService inputService, IBulletFactory bulletFactory, InventoryController inventoryController)
         {
             _playerCharacteristics = playerCharacteristics;
             _inputService = inputService;
             _bulletFactory = bulletFactory;
+            _inventoryController = inventoryController;
 
             _inputService.FireButtonPressed += () => _wantToAttack = true;
             _inputService.FireButtonReleased += () => _wantToAttack = false;

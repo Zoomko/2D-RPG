@@ -8,7 +8,6 @@ namespace Assets.CodeBase.Data.StaticData.DropLoot
     public class Loot : ScriptableObject
     {
         public List<LootWithoutProbability> DropAlways;
-        public List<LootWithProbability> DropLootWithProbability;
-      
+        public List<LootInfoWithProbability> DropLootWithProbability;      
     }
 }

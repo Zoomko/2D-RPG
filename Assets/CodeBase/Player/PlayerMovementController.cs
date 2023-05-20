@@ -1,5 +1,5 @@
 ﻿using Assets.CodeBase.App.Services.Input;
-using Assets.CodeBase.Data;
+using Assets.CodeBase.Data.StaticData;
 using UnityEngine;
 
 namespace Assets.CodeBase.Player

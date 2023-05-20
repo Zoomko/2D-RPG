@@ -27,7 +27,8 @@ namespace Assets.CodeBase.Enemy.StateMachine
             {
                 {typeof(DetectState), new DetectState(this, coroutineRunner, enemyCharacteristics, playerTransform, transform) },
                 {typeof(FollowState), new FollowState(this, coroutineRunner, enemyCharacteristics, movementController, playerTransform, transform) },
-                {typeof(AttackState), new AttackState(this, coroutineRunner, enemyCharacteristics, attackController, playerTransform, transform) }
+                {typeof(AttackState), new AttackState(this, coroutineRunner, enemyCharacteristics, attackController, playerTransform, transform) },
+                {typeof(DoNothingState), new DoNothingState() }
             };
 
             Enter<DetectState>();

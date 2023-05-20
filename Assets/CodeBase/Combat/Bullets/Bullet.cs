@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.CodeBase.Combat.Bullets
@@ -6,6 +7,8 @@ namespace Assets.CodeBase.Combat.Bullets
     public class Bullet:MonoBehaviour
     {
         private BulletParameters _parameters;
+
+        public event Action<GameObject> Destroyed;
         public void Contructor(BulletParameters bulletParameters)
         {
             _parameters = bulletParameters;
@@ -27,6 +30,7 @@ namespace Assets.CodeBase.Combat.Bullets
             }
             var damagable = _parameters.Target.gameObject.GetComponent<IDamagable>();
             damagable.GetDamage(_parameters.Damage);
+            Destroyed?.Invoke(gameObject);
         }
     }
 }

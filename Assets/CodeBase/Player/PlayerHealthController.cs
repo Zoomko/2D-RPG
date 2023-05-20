@@ -1,8 +1,8 @@
 ﻿using Assets.CodeBase.App;
 using Assets.CodeBase.App.Services.Input;
 using Assets.CodeBase.Combat;
-using Assets.CodeBase.Data;
 using Assets.CodeBase.Data.PersistentData;
+using Assets.CodeBase.Data.StaticData;
 using System;
 using Unity.VisualScripting;
 using UnityEngine;

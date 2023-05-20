@@ -24,11 +24,20 @@ namespace Assets.CodeBase.Factories
         public GameObject Create(BulletParameters bulletParameters)
         {
             var bulletGameObject = _pool.Get();
+            bulletGameObject.SetActive(true);
             var bullet = bulletGameObject.GetComponent<Bullet>();
             bulletGameObject.transform.position = bulletParameters.LaunchPosition;
+            bullet.Destroyed += OnBulletDestroy;
             bullet.Contructor(bulletParameters);
             bullet.LaunchBullet();
             return bulletGameObject;
+        }
+        public void OnBulletDestroy(GameObject bulletGameObject)
+        {
+            var bullet = bulletGameObject.GetComponent<Bullet>();
+            bullet.Destroyed -= OnBulletDestroy;
+            bulletGameObject.SetActive(false);
+            _pool.Put(bulletGameObject);
         }
     }
 }
